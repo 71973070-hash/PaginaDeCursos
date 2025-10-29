@@ -1,65 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cursos | Sistema de Cursos</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .course-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    .btn-inscrito {
-      background-color: #10B981 !important;
-      cursor: not-allowed;
-    }
-  </style>
-</head>
-<body class="bg-gray-100 text-gray-800">
+<?php 
+    include "vista/vistaCursos/cabecera.php";
+ ?>
 
-  <!-- En cursos.html, reemplaza el header completo con este: -->
-<header class="bg-blue-700 text-white p-4 shadow-lg">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold">Sistema de Cursos</h1>
-    <nav class="flex items-center space-x-6">
-      <a href="dashboard.html" class="relative py-2 hover:underline">Dashboard</a>
-      <a href="cursos.html" class="relative py-2 hover:underline font-semibold border-b-2 border-white">Cursos</a>
-      <a href="materiales.html" class="relative py-2 hover:underline">Materiales</a>
-      <a href="recompensas.html" class="relative py-2 hover:underline">Recompensas</a>
-      <a href="perfil.html" class="relative py-2 hover:underline">Mi Perfil</a>
-      <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition font-semibold">
-        Cerrar sesión
-      </button>
-    </nav>
-  </div>
-</header>
+ <?php 
+    include "vista/vistaCursos/head.php";
+ ?>
 
-  <main class="container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-6">Nuestros Cursos</h2>
+ <?php 
+    include "vista/vistaCursos/main.php";
+ ?>
 
-    <!-- Filtros de categoría -->
-    <div class="mb-6 flex flex-wrap gap-2">
-      <button onclick="filterCourses('all')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Todos</button>
-      <button onclick="filterCourses('programacion')" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">Programación</button>
-      <button onclick="filterCourses('cocina')" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">Cocina</button>
-      <button onclick="filterCourses('musica')" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">Música</button>
-      <button onclick="filterCourses('arte')" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">Arte</button>
-      <button onclick="filterCourses('negocios')" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">Negocios</button>
-    </div>
-
-    <div id="cursosContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Los cursos se cargarán dinámicamente -->
-    </div>
-  </main>
-
-  <footer class="bg-gray-800 text-white p-4 text-center">
-    &copy; 2025 Sistema de Cursos.
-  </footer>
+ <?php 
+    include "vista/vistaCursos/foot.php";
+ ?>
+  
 
   <script src="script.js"></script>
   <script>
