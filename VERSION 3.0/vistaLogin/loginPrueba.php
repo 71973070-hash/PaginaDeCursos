@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Login | Sistema de Cursos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body::before {
+      content: "";
+      background-image: url('img/fondo.jpg'); /* Cambia la ruta si tu imagen está en otra carpeta */
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col text-gray-800"> <!-- Quitamos bg-gray-100 -->
+
+  <header class="bg-blue-700 text-white p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">EDUCATEPLAY ▶️</h1>
+      <nav>
+        <a href="index.html" class="mx-2 hover:underline">Inicio</a>
+        <a href="cursos.html" class="mx-2 hover:underline">Cursos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-4 py-10">
+    <div class="bg-white/70 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md transition-all duration-300">
+      <h2 class="text-3xl font-bold mb-6 text-center text-blue-700">Iniciar Sesión</h2>
+
+      <form onsubmit="login(event)">
+        <div class="mb-4">
+          <label class="block text-sm font-semibold mb-1">Correo electrónico</label>
+          <input type="email" id="email" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-semibold mb-1">Contraseña</label>
+          <input type="password" id="password" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+        </div>
+        <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+          Ingresar
+        </button>
+      </form>
+
+      <p class="mt-4 text-sm text-center text-gray-700">
+        ¿No tienes cuenta?
+        <a href="#" onclick="toggleRegister()" class="text-blue-600 font-semibold hover:underline">Crear una</a>
+      </p>
+
+      <!-- Registro -->
+      <div id="registerForm" class="hidden mt-6 border-t pt-6 transition-all duration-500 ease-in-out">
+        <h3 class="text-lg font-bold mb-4 text-center text-green-700">Crear Cuenta Nueva</h3>
+        <form onsubmit="register(event)">
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-1">Nombre completo</label>
+            <input type="text" id="newName" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-1">Correo electrónico</label>
+            <input type="email" id="newEmail" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required />
+          </div>
+          <div class="mb-6">
+            <label class="block text-sm font-semibold mb-1">Contraseña</label>
+            <input type="password" id="newPassword" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required />
+          </div>
+          <button class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+            Crear cuenta
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup para mensajes -->
+  <div id="popup" class="fixed top-5 right-5 hidden px-4 py-3 rounded shadow text-white font-semibold flex items-center space-x-2 z-50">
+    <span id="popup-icon"></span>
+    <span id="popup-message"></span>
+  </div>

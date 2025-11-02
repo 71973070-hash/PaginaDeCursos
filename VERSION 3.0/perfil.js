@@ -384,7 +384,7 @@ function deleteAccount() {
     
     hideDeleteAccountModal();
     alert('Tu cuenta ha sido eliminada. Serás redirigido al login.');
-    window.location.href = 'login.html';
+    window.location.href = 'login.php';
 }
 
 function logoutAllSessions() {
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Verificar autenticación
     const usuario = localStorage.getItem('usuario');
     if (!usuario) {
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
     }
 });
 
@@ -410,6 +410,6 @@ function logout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
         localStorage.removeItem('usuario');
         localStorage.removeItem('nombre');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
     }
 }
