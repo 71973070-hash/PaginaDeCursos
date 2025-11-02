@@ -55,11 +55,11 @@
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-2xl font-bold">Sistema de Cursos</h1>
       <nav class="flex items-center space-x-6">
-        <a href="dashboard.html" class="relative py-2 hover:underline">Dashboard</a>
-        <a href="cursos.html" class="relative py-2 hover:underline">Cursos</a>
-        <a href="materiales.html" class="relative py-2 hover:underline font-semibold border-b-2 border-white">Materiales</a>
-        <a href="recompensas.html" class="relative py-2 hover:underline">Recompensas</a>
-        <a href="perfil.html" class="relative py-2 hover:underline">Mi Perfil</a>
+        <a href="dashboard.php" class="relative py-2 hover:underline">Dashboard</a>
+        <a href="cursos.php" class="relative py-2 hover:underline">Cursos</a>
+        <a href="materiales.php" class="relative py-2 hover:underline font-semibold border-b-2 border-white">Materiales</a>
+        <a href="recompensas.php" class="relative py-2 hover:underline">Recompensas</a>
+        <a href="perfil.php" class="relative py-2 hover:underline">Mi Perfil</a>
         <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition font-semibold">
           Cerrar sesión
         </button>
@@ -553,7 +553,7 @@
       const usuario = localStorage.getItem('usuario');
       if (!usuario) {
         alert('Debes iniciar sesión para acceder a los materiales.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
       }
     });
 
@@ -562,7 +562,7 @@
       if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
         localStorage.removeItem('usuario');
         localStorage.removeItem('nombre');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
       }
     }
   </script>
