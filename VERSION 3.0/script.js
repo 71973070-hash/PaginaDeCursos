@@ -286,7 +286,7 @@ class EvaluationSystem {
                 correctAnswers: 0
             }));
             
-            window.location.href = 'evaluacion.html';
+            window.location.href = 'evaluacion.php';
         } else {
             this.showModal('Evaluación No Disponible', 'Este curso no tiene evaluación disponible aún.', 'info');
         }
@@ -364,7 +364,7 @@ function logout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
         localStorage.removeItem('usuario');
         localStorage.removeItem('nombre');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
     }
 }
 

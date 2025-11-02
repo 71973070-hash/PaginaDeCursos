@@ -1,0 +1,521 @@
+<?php 
+    include "vistaEvaluacion/cabecera.php";
+ ?>
+
+<?php 
+    include "vistaEvaluacion/head.php";
+ ?>
+ <?php 
+    include "vistaEvaluacion/main.php";
+ ?>
+
+
+
+  <script src="script.js"></script>
+  <script>
+    // Preguntas específicas para CADA curso
+    const preguntasPorCurso = {
+      "Curso de HTML y CSS": [
+        {
+          pregunta: "¿Qué significa HTML?",
+          opciones: [
+            "Hyper Text Markup Language",
+            "High Tech Modern Language", 
+            "Home Tool Markup Language",
+            "Hyper Transfer Markup Language"
+          ],
+          respuesta: 0
+        },
+        {
+          pregunta: "¿Qué propiedad CSS se usa para cambiar el color de fondo?",
+          opciones: [
+            "color",
+            "background-color",
+            "bg-color",
+            "background"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué etiqueta HTML se usa para crear un enlace?",
+          opciones: [
+            "<link>",
+            "<a>",
+            "<href>",
+            "<url>"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cómo se comenta en CSS?",
+          opciones: [
+            "// comentario",
+            "/* comentario */",
+            "<!-- comentario -->",
+            "# comentario"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué significa CSS?",
+          opciones: [
+            "Computer Style Sheets",
+            "Creative Style System",
+            "Cascading Style Sheets",
+            "Colorful Style Sheets"
+          ],
+          respuesta: 2
+        }
+      ],
+      "JavaScript desde Cero": [
+        {
+          pregunta: "¿Cómo se declara una variable en JavaScript?",
+          opciones: [
+            "variable x = 5;",
+            "var x = 5;",
+            "x = 5;",
+            "let x = 5;"
+          ],
+          respuesta: 3
+        },
+        {
+          pregunta: "¿Qué método se usa para mostrar un mensaje en la consola?",
+          opciones: [
+            "print()",
+            "console.log()",
+            "display()",
+            "log()"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cómo se escribe un comentario de una línea en JavaScript?",
+          opciones: [
+            "// comentario",
+            "/* comentario */",
+            "<!-- comentario -->",
+            "# comentario"
+          ],
+          respuesta: 0
+        },
+        {
+          pregunta: "¿Qué operador se usa para comparar valor y tipo?",
+          opciones: [
+            "==",
+            "===",
+            "=",
+            "!="
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cómo se crea una función en JavaScript?",
+          opciones: [
+            "function myFunction()",
+            "def myFunction()",
+            "function: myFunction()",
+            "create myFunction()"
+          ],
+          respuesta: 0
+        }
+      ],
+      "Cocina Italiana Básica": [
+        {
+          pregunta: "¿Cuál es el ingrediente principal de la pasta fresca?",
+          opciones: [
+            "Harina y agua",
+            "Harina y huevos",
+            "Sémola y agua",
+            "Harina y leche"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué tipo de queso se usa tradicionalmente en la pizza Margherita?",
+          opciones: [
+            "Parmesano",
+            "Gorgonzola",
+            "Mozzarella",
+            "Ricotta"
+          ],
+          respuesta: 2
+        },
+        {
+          pregunta: "¿Cuál es el plato italiano más famoso de risotto?",
+          opciones: [
+            "Risotto alla Milanese",
+            "Risotto ai frutti di mare",
+            "Risotto al Nero di Seppia",
+            "Risotto con Funghi"
+          ],
+          respuesta: 0
+        },
+        {
+          pregunta: "¿Qué significa 'al dente' en la cocina italiana?",
+          opciones: [
+            "Muy cocido",
+            "Al punto",
+            "Crudo",
+            "Frío"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cuál es la región italiana famosa por la pasta?",
+          opciones: [
+            "Toscana",
+            "Emilia-Romaña",
+            "Sicilia",
+            "Lombardía"
+          ],
+          respuesta: 1
+        }
+      ],
+      "Guitarra para Principiantes": [
+        {
+          pregunta: "¿Cuántas cuerdas tiene una guitarra estándar?",
+          opciones: ["4", "5", "6", "7"],
+          respuesta: 2
+        },
+        {
+          pregunta: "¿Qué acorde se forma con los dedos en los trastes 0, 2, 2, 1, 0, 0?",
+          opciones: [
+            "Do Mayor",
+            "Sol Mayor",
+            "Mi Mayor",
+            "La Mayor"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué parte de la guitarra se usa para rasgar las cuerdas?",
+          opciones: [
+            "Mástil",
+            "Cuerpo",
+            "Puente",
+            "Clavijero"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cómo se llama la técnica de tocar notas individuales?",
+          opciones: [
+            "Rasgueo",
+            "Punteo",
+            "Armónico",
+            "Slide"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué acorde es el más básico para principiantes?",
+          opciones: [
+            "Fa Mayor",
+            "Si Mayor",
+            "Mi Menor",
+            "Do Mayor"
+          ],
+          respuesta: 3
+        }
+      ],
+      "Pintura al Óleo": [
+        {
+          pregunta: "¿Qué se usa tradicionalmente para diluir la pintura al óleo?",
+          opciones: [
+            "Agua",
+            "Aceite de linaza",
+            "Alcohol",
+            "Aguarrás"
+          ],
+          respuesta: 3
+        },
+        {
+          pregunta: "¿Qué famoso pintor usó la técnica del claroscuro?",
+          opciones: [
+            "Van Gogh",
+            "Rembrandt",
+            "Picasso",
+            "Monet"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué tipo de pincel es mejor para detalles finos?",
+          opciones: [
+            "Pincel plano",
+            "Pincel redondo",
+            "Pincel de abanico",
+            "Pincel angular"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Cuál es la regla de los tercios en composición?",
+          opciones: [
+            "Dividir el lienzo en 3 colores",
+            "Usar 3 pinceles diferentes",
+            "Dividir en 9 partes iguales",
+            "Pintar durante 3 horas"
+          ],
+          respuesta: 2
+        },
+        {
+          pregunta: "¿Qué significa 'alla prima' en pintura?",
+          opciones: [
+            "Pintura sobre pintura húmeda",
+            "Pintura con espátula",
+            "Pintura al aire libre",
+            "Pintura con modelos"
+          ],
+          respuesta: 0
+        }
+      ],
+      "Marketing Digital": [
+        {
+          pregunta: "¿Qué significa SEO?",
+          opciones: [
+            "Search Engine Optimization",
+            "Social Engagement Optimization",
+            "Search Engagement Online",
+            "Social Engine Optimization"
+          ],
+          respuesta: 0
+        },
+        {
+          pregunta: "¿Qué plataforma es mejor para marketing B2B?",
+          opciones: [
+            "Instagram",
+            "TikTok",
+            "LinkedIn",
+            "Pinterest"
+          ],
+          respuesta: 2
+        },
+        {
+          pregunta: "¿Qué métrica mide el costo por clic?",
+          opciones: [
+            "CPC",
+            "CPA",
+            "CPM",
+            "ROI"
+          ],
+          respuesta: 0
+        },
+        {
+          pregunta: "¿Qué es el email marketing?",
+          opciones: [
+            "Publicidad en televisión",
+            "Marketing por correo electrónico",
+            "Marketing en redes sociales",
+            "Publicidad en radio"
+          ],
+          respuesta: 1
+        },
+        {
+          pregunta: "¿Qué significa CTR?",
+          opciones: [
+            "Click Through Rate",
+            "Cost Through Rate",
+            "Conversion Through Rate",
+            "Content Through Rate"
+          ],
+          respuesta: 0
+        }
+      ]
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const evaluacionData = JSON.parse(localStorage.getItem('evaluacionActual'));
+      
+      if (!evaluacionData) {
+        window.location.href = 'cursos.php';
+        return;
+      }
+
+      // Obtener las preguntas específicas para este curso
+      const preguntasCurso = preguntasPorCurso[evaluacionData.nombre] || [];
+      
+      if (preguntasCurso.length === 0) {
+        document.getElementById('evaluacionContainer').innerHTML = `
+          <div class="bg-white rounded-lg shadow p-6 text-center">
+            <div class="text-6xl mb-4">😔</div>
+            <h2 class="text-2xl font-bold mb-4">Evaluación No Disponible</h2>
+            <p class="text-lg mb-6">Este curso no tiene evaluación disponible aún.</p>
+            <button onclick="volverACursos()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+              Volver a Cursos
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let preguntaActual = 0;
+      let respuestasCorrectas = 0;
+      const totalPreguntas = preguntasCurso.length;
+
+      function mostrarPregunta() {
+        const container = document.getElementById('evaluacionContainer');
+        const pregunta = preguntasCurso[preguntaActual];
+
+        container.innerHTML = `
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-bold text-blue-800">${evaluacionData.nombre}</h2>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold">
+                Pregunta ${preguntaActual + 1} de ${totalPreguntas}
+              </span>
+            </div>
+            
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold mb-4 text-gray-800">${pregunta.pregunta}</h3>
+              <div class="space-y-3">
+                ${pregunta.opciones.map((opcion, index) => `
+                  <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 cursor-pointer transition-all duration-200">
+                    <input type="radio" name="respuesta" value="${index}" class="mr-4 h-5 w-5 text-blue-600">
+                    <span class="text-gray-700">${opcion}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <div>
+                ${preguntaActual > 0 ? `
+                  <button onclick="anteriorPregunta()" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 transition">
+                    ← Anterior
+                  </button>
+                ` : ''}
+              </div>
+              
+              <button onclick="siguientePregunta()" class="bg-blue-600 text-white px-8 py-2 rounded hover:bg-blue-700 transition font-semibold">
+                ${preguntaActual === totalPreguntas - 1 ? '🏁 Finalizar' : 'Siguiente →'}
+              </button>
+            </div>
+
+            <div class="mt-4 bg-gray-100 p-3 rounded text-sm text-gray-600">
+              <strong>Tip:</strong> Selecciona la respuesta correcta antes de continuar.
+            </div>
+          </div>
+        `;
+      }
+
+      window.siguientePregunta = function() {
+        const respuestaSeleccionada = document.querySelector('input[name="respuesta"]:checked');
+        
+        if (!respuestaSeleccionada) {
+          alert('📝 Por favor selecciona una respuesta antes de continuar.');
+          return;
+        }
+
+        // Verificar si la respuesta es correcta
+        const respuestaIndex = parseInt(respuestaSeleccionada.value);
+        const esCorrecta = respuestaIndex === preguntasCurso[preguntaActual].respuesta;
+        
+        if (esCorrecta) {
+          respuestasCorrectas++;
+        }
+
+        preguntaActual++;
+
+        if (preguntaActual < totalPreguntas) {
+          mostrarPregunta();
+        } else {
+          finalizarEvaluacion();
+        }
+      }
+
+      window.anteriorPregunta = function() {
+        if (preguntaActual > 0) {
+          preguntaActual--;
+          respuestasCorrectas = Math.max(0, respuestasCorrectas - 1);
+          mostrarPregunta();
+        }
+      }
+
+      function finalizarEvaluacion() {
+        const porcentaje = (respuestasCorrectas / totalPreguntas) * 100;
+        const aprobado = porcentaje >= 70;
+
+        document.getElementById('evaluacionContainer').innerHTML = `
+          <div class="bg-white rounded-lg shadow p-8 text-center">
+            <div class="text-6xl mb-4">${aprobado ? '🎉' : '😔'}</div>
+            <h2 class="text-3xl font-bold mb-4 ${aprobado ? 'text-green-600' : 'text-red-600'}">
+              ${aprobado ? '¡Felicidades!' : 'Sigue practicando'}
+            </h2>
+            
+            <div class="bg-${aprobado ? 'green' : 'red'}-50 border border-${aprobado ? 'green' : 'red'}-400 text-${aprobado ? 'green' : 'red'}-700 px-6 py-4 rounded mb-6">
+              <p class="text-lg font-semibold">Obtuviste ${respuestasCorrectas} de ${totalPreguntas} respuestas correctas</p>
+              <p class="text-2xl font-bold mt-2">${porcentaje.toFixed(1)}%</p>
+            </div>
+            
+            <div class="mb-6">
+              <p class="text-gray-600">
+                ${aprobado 
+                  ? '¡Excelente trabajo! Has demostrado buen conocimiento del curso.' 
+                  : 'No te preocupes, puedes volver a intentarlo. Revisa el material del curso.'
+                }
+              </p>
+            </div>
+
+            <div class="flex gap-4 justify-center flex-wrap">
+              ${!aprobado ? `
+                <button onclick="reintentarEvaluacion()" class="bg-yellow-500 text-white px-6 py-3 rounded hover:bg-yellow-600 transition font-semibold">
+                  🔄 Reintentar
+                </button>
+              ` : ''}
+              <button onclick="volverACursos()" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition font-semibold">
+                📚 Volver a Cursos
+              </button>
+              ${aprobado ? `
+                <button onclick="siguienteCurso()" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition font-semibold">
+                  🚀 Siguiente Curso
+                </button>
+              ` : ''}
+            </div>
+
+            ${aprobado ? `
+              <div class="mt-6 p-4 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg">
+                <p class="font-semibold">¡Has ganado 20 puntos por completar esta evaluación!</p>
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        // Registrar progreso si aprobó
+        if (aprobado && window.progressManager) {
+          window.progressManager.updateCourseProgress(
+            evaluacionData.nombre, 
+            `Evaluación ${new Date().toLocaleDateString()}`,
+            60 // 60 minutos por evaluación
+          );
+          
+          // Otorgar puntos
+          if (window.RewardSystem) {
+            window.RewardSystem.awardPoints(20, `Evaluación aprobada: ${evaluacionData.nombre}`);
+          }
+        }
+      }
+
+      window.reintentarEvaluacion = function() {
+        preguntaActual = 0;
+        respuestasCorrectas = 0;
+        mostrarPregunta();
+      }
+
+      window.volverACursos = function() {
+        localStorage.removeItem('evaluacionActual');
+        window.location.href = 'cursos.php';
+      }
+
+      window.siguienteCurso = function() {
+        localStorage.removeItem('evaluacionActual');
+        // Aquí podrías redirigir al siguiente curso recomendado
+        window.location.href = 'cursos.php';
+      }
+
+      // Iniciar la evaluación
+      mostrarPregunta();
+    });
+  </script>
+</body>
+</html>
