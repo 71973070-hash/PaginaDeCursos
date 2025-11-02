@@ -1,0 +1,294 @@
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-6 container mx-auto">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Header del Perfil -->
+      <div class="bg-white rounded-xl shadow-lg p-8 mb-6">
+        <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8">
+          <!-- Avatar -->
+          <div class="avatar-upload">
+            <img id="userAvatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
+                 alt="Avatar" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-lg">
+            <div class="avatar-overlay" onclick="document.getElementById('avatarInput').click()">
+              <span class="text-white font-semibold">Cambiar</span>
+            </div>
+            <input type="file" id="avatarInput" accept="image/*" class="hidden" onchange="changeAvatar(event)">
+          </div>
+          
+          <!-- Información del usuario -->
+          <div class="flex-1 text-center md:text-left">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2" id="userName">Cargando...</h2>
+            <p class="text-gray-600 mb-4" id="userEmail">Cargando...</p>
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+              <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                🎓 <span id="userLevel">Nivel 1</span>
+              </div>
+              <div class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                ⭐ <span id="userPoints">0</span> puntos
+              </div>
+              <div class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+                📚 <span id="userCourses">0</span> cursos
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botones de acción -->
+          <div class="flex space-x-3">
+            <button onclick="openTab('editProfile')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+              ✏️ Editar Perfil
+            </button>
+            <button onclick="exportUserData()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+              📥 Exportar Datos
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación por pestañas -->
+      <div class="bg-white rounded-xl shadow-lg mb-6">
+        <div class="border-b">
+          <nav class="flex flex-wrap -mb-px">
+            <button onclick="openTab('stats')" class="tab-button py-4 px-6 text-blue-600 border-b-2 border-blue-600 font-semibold">
+              📊 Estadísticas
+            </button>
+            <button onclick="openTab('editProfile')" class="tab-button py-4 px-6 text-gray-500 hover:text-blue-600 font-medium">
+              👤 Editar Perfil
+            </button>
+            <button onclick="openTab('security')" class="tab-button py-4 px-6 text-gray-500 hover:text-blue-600 font-medium">
+              🔒 Seguridad
+            </button>
+            <button onclick="openTab('achievements')" class="tab-button py-4 px-6 text-gray-500 hover:text-blue-600 font-medium">
+              🏆 Logros
+            </button>
+            <button onclick="openTab('preferences')" class="tab-button py-4 px-6 text-gray-500 hover:text-blue-600 font-medium">
+              ⚙️ Preferencias
+            </button>
+          </nav>
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div class="p-8">
+          
+          <!-- Pestaña: Estadísticas -->
+          <div id="stats" class="tab-content active">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Mis Estadísticas de Aprendizaje</h3>
+            
+            <div class="stats-grid mb-8">
+              <div class="bg-blue-50 p-6 rounded-lg text-center">
+                <div class="text-3xl font-bold text-blue-700 mb-2" id="totalCourses">0</div>
+                <div class="text-blue-600 font-semibold">Cursos Inscritos</div>
+              </div>
+              <div class="bg-green-50 p-6 rounded-lg text-center">
+                <div class="text-3xl font-bold text-green-700 mb-2" id="completedCourses">0</div>
+                <div class="text-green-600 font-semibold">Cursos Completados</div>
+              </div>
+              <div class="bg-purple-50 p-6 rounded-lg text-center">
+                <div class="text-3xl font-bold text-purple-700 mb-2" id="totalHours">0h</div>
+                <div class="text-purple-600 font-semibold">Horas de Estudio</div>
+              </div>
+              <div class="bg-yellow-50 p-6 rounded-lg text-center">
+                <div class="text-3xl font-bold text-yellow-700 mb-2" id="successRate">0%</div>
+                <div class="text-yellow-600 font-semibold">Tasa de Éxito</div>
+              </div>
+            </div>
+
+            <!-- Progreso de cursos -->
+            <div class="mb-8">
+              <h4 class="text-xl font-semibold text-gray-800 mb-4">Progreso de Cursos</h4>
+              <div id="coursesProgressList" class="space-y-4">
+                <!-- Los cursos se cargan dinámicamente -->
+              </div>
+            </div>
+
+            <!-- Actividad reciente -->
+            <div>
+              <h4 class="text-xl font-semibold text-gray-800 mb-4">Actividad Reciente</h4>
+              <div id="recentActivity" class="space-y-3">
+                <!-- La actividad se carga dinámicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Pestaña: Editar Perfil -->
+          <div id="editProfile" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Editar Información Personal</h3>
+            
+            <form onsubmit="updateProfile(event)" class="max-w-2xl space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre Completo</label>
+                  <input type="text" id="editName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2">Correo Electrónico</label>
+                  <input type="email" id="editEmail" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+              </div>
+              
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2">Teléfono</label>
+                  <input type="tel" id="editPhone" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2">País</label>
+                  <select id="editCountry" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Seleccionar país</option>
+                    <option value="MX">México</option>
+                    <option value="ES">España</option>
+                    <option value="AR">Argentina</option>
+                    <option value="CO">Colombia</option>
+                    <option value="PE">Perú</option>
+                    <option value="CL">Chile</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Biografía</label>
+                <textarea id="editBio" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Cuéntanos sobre ti..."></textarea>
+              </div>
+              
+              <div class="flex space-x-4">
+                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                  💾 Guardar Cambios
+                </button>
+                <button type="button" onclick="openTab('stats')" class="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 transition font-semibold">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Pestaña: Seguridad -->
+          <div id="security" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Configuración de Seguridad</h3>
+            
+            <div class="max-w-2xl space-y-8">
+              <!-- Cambiar contraseña -->
+              <div class="bg-gray-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">🔐 Cambiar Contraseña</h4>
+                <form onsubmit="changePassword(event)" class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Contraseña Actual</label>
+                    <input type="password" id="currentPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nueva Contraseña</label>
+                    <input type="password" id="newPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required minlength="6">
+                    <p class="text-xs text-gray-500 mt-1">Mínimo 6 caracteres</p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Confirmar Nueva Contraseña</label>
+                    <input type="password" id="confirmPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                  <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                    🔄 Actualizar Contraseña
+                  </button>
+                </form>
+              </div>
+
+              <!-- Sesiones activas -->
+              <div class="bg-gray-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">💻 Sesiones Activas</h4>
+                <div id="activeSessions" class="space-y-3">
+                  <!-- Las sesiones se cargan dinámicamente -->
+                </div>
+                <button onclick="logoutAllSessions()" class="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition text-sm">
+                  🚪 Cerrar Todas las Sesiones
+                </button>
+              </div>
+
+              <!-- Eliminar cuenta -->
+              <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                <h4 class="text-lg font-semibold text-red-800 mb-2">⚠️ Zona Peligrosa</h4>
+                <p class="text-red-700 mb-4">Esta acción no se puede deshacer. Se eliminarán todos tus datos permanentemente.</p>
+                <button onclick="showDeleteAccountModal()" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-semibold">
+                  🗑️ Eliminar Mi Cuenta
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pestaña: Logros -->
+          <div id="achievements" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🏆 Mis Logros y Recompensas</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="achievementsList">
+              <!-- Los logros se cargan dinámicamente -->
+            </div>
+          </div>
+
+          <!-- Pestaña: Preferencias -->
+          <div id="preferences" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">⚙️ Preferencias de la Cuenta</h3>
+            
+            <div class="max-w-2xl space-y-8">
+              <!-- Notificaciones -->
+              <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">🔔 Configuración de Notificaciones</h4>
+                <div class="space-y-4">
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="notifCourses" class="h-5 w-5 text-blue-600 rounded">
+                    <span class="text-gray-700">Notificaciones de nuevos cursos</span>
+                  </label>
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="notifProgress" class="h-5 w-5 text-blue-600 rounded" checked>
+                    <span class="text-gray-700">Actualizaciones de progreso</span>
+                  </label>
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="notifAchievements" class="h-5 w-5 text-blue-600 rounded" checked>
+                    <span class="text-gray-700">Logros desbloqueados</span>
+                  </label>
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="notifEmail" class="h-5 w-5 text-blue-600 rounded">
+                    <span class="text-gray-700">Notificaciones por correo</span>
+                  </label>
+                </div>
+                <button onclick="saveNotificationSettings()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                  Guardar Preferencias
+                </button>
+              </div>
+
+              <!-- Privacidad -->
+              <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">👁️ Configuración de Privacidad</h4>
+                <div class="space-y-4">
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="privacyProfile" class="h-5 w-5 text-blue-600 rounded" checked>
+                    <span class="text-gray-700">Perfil público</span>
+                  </label>
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="privacyProgress" class="h-5 w-5 text-blue-600 rounded">
+                    <span class="text-gray-700">Mostrar mi progreso</span>
+                  </label>
+                  <label class="flex items-center space-x-3">
+                    <input type="checkbox" id="privacyAchievements" class="h-5 w-5 text-blue-600 rounded" checked>
+                    <span class="text-gray-700">Mostrar mis logros</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Tema -->
+              <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">🎨 Preferencias de Tema</h4>
+                <div class="flex space-x-4">
+                  <button onclick="setTheme('light')" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                    ☀️ Claro
+                  </button>
+                  <button onclick="setTheme('dark')" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                    🌙 Oscuro
+                  </button>
+                  <button onclick="setTheme('auto')" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                    🔄 Automático
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
