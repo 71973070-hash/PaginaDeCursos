@@ -9,7 +9,7 @@
     include "vistaDashboard/main.php";
  ?>
  <?php 
-    include "vistaDashboard/pie.php";
+    include "vistaDashboard/foot.php";
  ?>
 
 

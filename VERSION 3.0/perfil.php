@@ -9,7 +9,7 @@
     include "vistaPerfil/main.php";
  ?>
  <?php 
-    include "vistaPerfil/pie.php";
+    include "vistaPerfil/foot.php";
  ?>
 
 

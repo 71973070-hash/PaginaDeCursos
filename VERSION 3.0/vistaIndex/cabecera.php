@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio | Sistema de Cursos</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <script>
     // Al cargar la página, verifica si el usuario está logueado
     window.onload = function() {

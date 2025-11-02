@@ -45,7 +45,7 @@
           localStorage.setItem('nombre', usuarios[email].nombre);
           showPopup('Inicio de sesión correcto ✔️', 'success');
           setTimeout(() => {
-            window.location.href = 'dashboard.html';
+            window.location.href = 'dashboard.php';
           }, 1500);
         } else {
           showPopup('Contraseña incorrecta ❌', 'error');
@@ -76,7 +76,7 @@
 
       showPopup('Cuenta creada exitosamente ✔️', 'success');
       setTimeout(() => {
-        window.location.href = 'dashboard.html';
+        window.location.href = 'dashboard.php';
       }, 1500);
     }
   </script>

@@ -9,7 +9,7 @@
     include "vistaCursos/main.php";
  ?>
  <?php 
-    include "vistaCursos/pie.php";
+    include "vistaCursos/foot.php";
  ?>
 
 
